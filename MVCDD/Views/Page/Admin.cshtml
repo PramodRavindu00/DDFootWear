@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        body {
+            margin-top: 20px;
+            background-image: url('/images/shoes.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    @section scripts{
+        @Scripts.Render("~/bundles/jqueryval");
+
+        <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+
+    });
+
+    $(function () {
+        var errorMessage = '@TempData["ErrorMessage"]'
+             if (errorMessage != '')
+                 alertify.error(errorMessage);
+
+    });
+        </script>
+    }
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@model MVCDD.Models.MVCProductModel
+@{
+    ViewBag.Title = "Add or Edit Product Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<div class="form-body">
+    <h2>Add New Product</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.ProductID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productName, "Product Name : ")
+            @Html.EditorFor(model => model.productName)
+            @Html.ValidationMessageFor(model => model.productName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, "Price : ")
+            @Html.EditorFor(model => model.price)
+            @Html.ValidationMessageFor(model => model.price)
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button submit"/>
+        </div>
+            }
+        </div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+    }

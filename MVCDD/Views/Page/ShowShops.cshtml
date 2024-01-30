@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MVCDD.Models.MVCShopModel>
+@{
+    ViewBag.Title = "ShowShops";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<table class="table" table table-striped>
+    <thead class="table-heading">
+        <tr>
+            <th>
+                Shop Name
+            </th>
+            <th>
+                Location
+            </th>
+          
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.shopname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+           
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MVCDD.Models.MVCStockModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    <a href="@Url.Action("AddProduct","Stock")" class="btn btn-default"><i class="fa fa-plus"></i> Add Product to Stock</a>
+</p>
+<table class="table" table table-striped>
+    <thead class="table-heading">
+        <tr>
+            
+            <th>
+                Product Name
+            </th>
+            <th>
+                Available Stock
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                <a href="@Url.Action("AddStock","Stock",new { id = item.ProductID })" class="btn btn-default edit">Add Stock</a>
+               
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+{
+    <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+
+    });
+
+    function Delete(id)
+    {
+        alertify.confirm('Delete Product', 'Are you sure you want to delete this product ?', function () {
+            window.location.href = '@Url.Action("Delete","Product")/' + id;
+        }, null);
+
+    }
+    </script>
+
+}
+

@@ -1,0 +1,52 @@
+﻿@model MVCDD.Models.MVCUserModel
+@{
+    ViewBag.Title = "User Login";
+   
+}
+<body>
+    <div class="form-body">
+        @using (Html.BeginForm())
+        {
+            <h2>User Login</h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.username, "Enter User Name : ")
+                @Html.EditorFor(model => model.username)
+                @Html.ValidationMessageFor(model => model.username)
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, "Enter Password : ")
+                @Html.PasswordFor(model => model.password)
+                @Html.ValidationMessageFor(model => model.password)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn button submit" />
+            </div>
+        }
+    </div>
+
+
+
+    @section scripts{
+        @Scripts.Render("~/bundles/jqueryval");
+
+        <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+
+    });
+
+    $(function () {
+        var errorMessage = '@TempData["ErrorMessage"]'
+             if (errorMessage != '')
+                 alertify.error(errorMessage);
+
+    });
+        </script>
+    }
+
+</body>

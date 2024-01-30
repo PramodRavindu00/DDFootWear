@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVCDD.Models.MVCUserModel>
+
+@{
+    ViewBag.Title = "User";
+}
+
+<p>
+    <a href="@Url.Action("UserRegister","User")" class="btn btn-default"><i class="fa fa-plus"></i> Register</a>
+</p>
+
+<table class="table" table table-striped>
+    <thead class="table-heading">
+        <tr>
+            <th>
+                User Name
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                User Type
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usertype)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Product", new { id = item.username })" class="btn btn-default">Edit</a>
+               <a href="@Url.Action("Delete", "User", new { id = item.username })" class="btn btn-default">Delete</a>
+                <a onclick="Delete('@item.username')" class="btn btn-default">Delete F</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+{
+    <script>
+
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+
+    });
+    </script>
+}

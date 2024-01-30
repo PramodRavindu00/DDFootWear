@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MVCDD.Models.MVCShopModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    <a href="@Url.Action("AddNewShop","Shop")" class="btn btn-default"><i class="fa fa-plus"></i> Add New Shop</a>
+</p>
+<table class="table" table table-striped>
+    <thead class="table-heading">
+        <tr>
+            <th>
+                Shop ID ( User Name )
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Shop Type
+            </th>
+            <th>
+                Shop Name
+            </th>
+            <th>
+                Location
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usertype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shopname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                <a href="@Url.Action("EditShop","Shop",new { username = item.username })" class="btn btn-default edit">Edit</a>
+                <a onclick="Delete(@item.username)" class="btn btn-default delete">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+{
+    <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+
+    });
+
+    function Delete(id)
+    {
+        alertify.confirm('Delete Product', 'Are you sure you want to delete this product ?', function () {
+            window.location.href = '@Url.Action("Delete","Product")/' + id;
+        }, null);
+
+    }
+    </script>
+
+}
+

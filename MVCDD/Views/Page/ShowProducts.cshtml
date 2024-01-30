@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<MVCDD.Models.MVCProductModel>
+
+@{
+
+    ViewBag.Title = "All Products";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+
+}
+
+<table class="table" table table-striped>
+    <thead class="table-heading">
+        <tr>
+            <th>
+                Product ID
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+

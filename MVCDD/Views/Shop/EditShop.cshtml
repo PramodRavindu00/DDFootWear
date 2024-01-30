@@ -1,0 +1,72 @@
+﻿
+@model MVCDD.Models.MVCShopModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+
+        <h2>Edit Shop Details</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.username, "Enter User Name for shop Account: ")
+            @Html.EditorFor(model => model.username)
+            @Html.ValidationMessageFor(model => model.username)
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, "Enter Password : ")
+            @Html.PasswordFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.shopname, "Enter Shop Name : ")
+            @Html.EditorFor(model => model.shopname)
+            @Html.ValidationMessageFor(model => model.shopname)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.usertype, "Select Shop Type : ")
+            @Html.DropDownListFor(model => model.usertype, new SelectList(new[]
+                {
+                    new SelectListItem { Value = "outlet", Text = "Outlet" },
+                    new SelectListItem { Value = "partner", Text = "Partner" }
+                }, "Value", "Text"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.usertype)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.location, "Enter Shop Location : ")
+            @Html.EditorFor(model => model.location)
+            @Html.ValidationMessageFor(model => model.location)
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn button submit" />
+        </div>
+    }
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval");
+
+    <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+
+    });
+
+    $(function () {
+        var errorMessage = '@TempData["ErrorMessage"]'
+             if (errorMessage != '')
+                 alertify.error(errorMessage);
+
+    });
+    </script>
+}
+
+
